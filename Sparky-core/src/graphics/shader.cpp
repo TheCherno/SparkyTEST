@@ -56,6 +56,31 @@ GLuint Shader::load(const char *vert_path, const char *frag_path)
     return program;
 }
 
+GLint Shader::get_uniform(const GLchar *name)
+{
+    if (locationCache.find(name) != locationCache.end())
+        return locationCache[name];
+
+    GLint location = glGetUniformLocation(shader, name);
+    locationCache[name] = location;
+    return location;
+}
+
+void Shader::setUniform1f(const GLchar *name, GLfloat value)
+{
+    glUniform1f(get_uniform(name), value);
+}
+
+void Shader::setUniform2f(const GLchar *name, GLfloat x, GLfloat y)
+{
+    glUniform2f(get_uniform(name), x, y);
+}
+
+void Shader::setUniform3f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z)
+{
+    glUniform3f(get_uniform(name), x, y, z);
+}
+
 void Shader::enable() const
 {
     glUseProgram(shader);
