@@ -18,6 +18,7 @@ void main()
 {
     vec4 pos = position;
     pos.x += time;
-    gl_Position = /*pr_matrix **/ vw_matrix * ml_matrix * pos;
+    pos.y += time;
+    gl_Position = pr_matrix * vw_matrix * ml_matrix * pos;
     vs_out.color = color;
 }

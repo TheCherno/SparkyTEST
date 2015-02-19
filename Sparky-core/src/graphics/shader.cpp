@@ -81,6 +81,16 @@ void Shader::setUniform3f(const GLchar *name, GLfloat x, GLfloat y, GLfloat z)
     glUniform3f(get_uniform(name), x, y, z);
 }
 
+void Shader::setUniform3f(const GLchar *name, const sparky::maths::vec3 &vector)
+{
+    setUniform3f(name, vector.x, vector.y, vector.z);
+}
+
+void Shader::setUniformMat4f(const GLchar *name, const sparky::maths::mat4 &matrix)
+{
+    glUniformMatrix4fv(get_uniform(name), 1, false, matrix.to_array());
+}
+
 void Shader::enable() const
 {
     glUseProgram(shader);

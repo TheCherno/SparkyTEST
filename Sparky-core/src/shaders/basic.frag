@@ -9,5 +9,5 @@ in DATA
 
 void main()
 {
-    color = fs_in.color;
+    color = vec4(gl_FragCoord.x / 960.0 * fs_in.color.x, gl_FragCoord.y / 540.0 * fs_in.color.y, fs_in.color.z, 1.0f);
 }
