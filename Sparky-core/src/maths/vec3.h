@@ -20,19 +20,21 @@ namespace sparky { namespace maths {
         vec3& operator+=(const vec3 &other);
         vec3& operator-=(const vec3 &other);
 
-        friend vec3& operator+(vec3 left, const vec3 &right);
-        friend vec3& operator-(vec3 left, const vec3 &right);
-
         inline bool operator==(const vec3 &other) const
         {
             return x == other.x && y == other.y && z == other.z;
         }
+
         inline bool operator!=(const vec3 &other) const
         {
             return !(*this == other);
         }
 
-        friend std::ostream& operator<<(std::ostream &stream, const vec3 &vector);
     };
+
+    vec3 operator+(const vec3 &left, const vec3 &right);
+    vec3 operator-(const vec3 &left, const vec3 &right);
+    std::ostream& operator<<(std::ostream &stream, const vec3 &vector);
+
 
 } }

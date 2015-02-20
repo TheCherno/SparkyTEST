@@ -15,9 +15,10 @@ namespace sparky { namespace maths {
     public:
         mat4();
         mat4(float diagonal);
-        mat4(float *elements);
+        mat4(const float *elements);
+		
+        mat4 translate(const vec3& vector) const;
 
-        mat4& translate(vec3& vector);
 
         inline const float* to_array() const
         {
@@ -25,7 +26,8 @@ namespace sparky { namespace maths {
         }
 
         mat4& operator*=(const mat4 &right);
-        friend mat4 operator*(mat4 left, const mat4 &right);
+        friend mat4 operator*(const mat4 &left, const mat4 &right);
+
     public:
         static mat4 identity();
         static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);
