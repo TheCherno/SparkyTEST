@@ -1,4 +1,6 @@
 Debug/
+Release/
 Sparky-core/Debug
+Sparky-core/Release
 *.opensdf
 *.sdf
