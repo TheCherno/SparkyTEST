@@ -25,19 +25,16 @@ namespace sparky { namespace maths {
 
     vec3& vec3::add(const vec3 &other)
     {
-        x += other.x;
-        y += other.y;
-        z += other.z;
+        *this = *this + other;
         return *this;
     }
 
     vec3& vec3::subtract(const vec3 &other)
     {
-        x -= other.x;
-        y -= other.y;
-        z -= other.z;
+        *this = *this - other;
         return *this;
     }
+
     vec3& vec3::operator += (const vec3 &other)
     {
         return add(other);
@@ -47,15 +44,15 @@ namespace sparky { namespace maths {
     {
         return subtract(other);
     }
-
-    vec3& operator+(vec3 left, const vec3 &right)
+    
+    vec3 operator+(const vec3 &left, const vec3 &right)
     {
-        return left += right;
+        return vec3(left.x + right.x, left.y + right.y, left.z + right.z);
     }
 
-    vec3& operator-(vec3 left, const vec3 &right)
+    vec3 operator-(const vec3 &left, const vec3 &right)
     {
-        return left -= right;
+        return vec3(left.x - right.x, left.y - right.y, left.z - right.z);
     }
 
     std::ostream& operator<<(std::ostream &stream, const vec3 &vector)

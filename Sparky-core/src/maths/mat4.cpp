@@ -31,20 +31,21 @@ namespace sparky { namespace maths {
         elements[3 + 3 * 4] = diagonal;
     }
 
-    mat4::mat4(float *elements)
+    mat4::mat4(const float *elements)
     {
         for (int i = 0; i < 4 * 4; i++)
             this->elements[i] = elements[i];
     }
-
-    mat4& mat4::translate(vec3& vector)
+    
+    mat4 mat4::translate(const vec3& vector) const
     {
-        mat4 result(1.0f);
-        elements[0 + 3 * 4] = vector.x;
-        elements[1 + 3 * 4] = vector.y;
-        elements[2 + 3 * 4] = vector.z;
-        return *this * result;
+        mat4 translation(1.0f);
+        translation.elements[0 + 3 * 4] = vector.x;
+        translation.elements[1 + 3 * 4] = vector.y;
+        translation.elements[2 + 3 * 4] = vector.z;
+        return *this * translation;
     }
+
 
     mat4 mat4::identity()
     {
@@ -75,11 +76,14 @@ namespace sparky { namespace maths {
 
     mat4& mat4::operator*=(const mat4 &right)
     {
-        return *this * right;
+        *this = *this * right;
+        return *this;
     }
 
-    mat4 operator*(mat4 left, const mat4 &right)
+    mat4 operator*(const mat4 &left, const mat4 &right)
     {
+        mat4 result;
+
         for (int y = 0; y < 4; y++)
         {
             for (int x = 0; x < 4; x++)
@@ -89,10 +93,11 @@ namespace sparky { namespace maths {
                 {
                     sum += left.elements[x + i * 4] * right.elements[i + y * 4];
                 }
-                left.elements[x + y * 4] = sum;
+                result.elements[y + x * 4] = sum;
             }
         }
-        return left;
+
+        return result;
     }
 
 } }
