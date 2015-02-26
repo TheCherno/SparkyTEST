@@ -16,9 +16,6 @@ uniform float time;
 
 void main()
 {
-    vec4 pos = position;
-    pos.x += time;
-    pos.y += time;
-    gl_Position = pr_matrix * vw_matrix * ml_matrix * pos;
+    gl_Position = pr_matrix * vw_matrix * ml_matrix * position;
     vs_out.color = color;
 }
